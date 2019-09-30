@@ -1,0 +1,11 @@
+.form-group{
+    width: 100%;
+    max-width: 420px;
+    padding-top: 10em;
+    margin: auto;
+}
+
+input[type=checkbox] {
+    margin-left: 10px;
+    border-radius: 3px;
+}

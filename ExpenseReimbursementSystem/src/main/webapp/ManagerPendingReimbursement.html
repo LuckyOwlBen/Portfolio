@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+   		<meta charset="UTF-8"/>
+    	<script src ="ManagerReimbursementTable.js"></script>
+    </head>
+    <body>
+        <div id="managerViewdpt"></div>
+
+        <form action="approveReimbursement" method="GET">
+            <p>accept reimbursement by entering the reimbursement id</p>
+            <input name="id" type="number" min="1" step="1">
+            <button type="submit">Submit</button>
+        </form>
+
+        <form action ="denyReimbursement" method="GET">
+            <p>reject reimbursement by entering the reimbursement id</p>
+            <input name="id" type="number" min="1" step="1">
+            <button type="submit">Submit</button>
+        </form>
+        
+        <form action="employeeHomePage" method="GET">
+        	<button type ="submit">Return to home page</button>
+        </form>
+
+    </body>
+</html>

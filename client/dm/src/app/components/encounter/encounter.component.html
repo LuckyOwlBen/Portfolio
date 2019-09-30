@@ -1,0 +1,88 @@
+   <app-nav></app-nav>
+   <div class="container-fluid">
+        <div class="row">
+          <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Turn Order</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+              <ul class="nav flex-column">
+                <li #turnList *ngFor="let entity of entities" [class.selected]="entity === selectedEntity" (click)="onSelect(entity)">
+                  <button type="button" class="btn btn-dark" [routerLink]="" (click)="openEntityModal(entityModal)">
+                    <span class="badge">{{entity.initiativeTotal}}</span> {{entity.name}} Armor={{entity.armorClass}}
+                  </button>
+                </li>
+              </ul>
+
+            </div>
+          </nav>
+          <main role="main">
+              <div class="text-center mb-4">
+                <h2>Round {{roundNumber}} Turn {{turnNumber}}</h2>
+                <h4>Current Turn</h4>
+              </div>
+              <app-active-entity [entity]="activeEntity"></app-active-entity>
+              <button type="button" id="next" class="btn btn-outline-dark" (click)="passTurn()">Next Turn</button>
+              <span *ngIf="turnNumber === 1">
+                <button type="button" id="addMonster" class="btn btn-outline-dark" [routerLink]="" (click)="openMonsterModal(addMonsterModal)" (click)="getMonsters()">Add Monster</button>
+              </span>
+              <form id="end">
+                  <button type="button" class="btn btn-dark" (click)="saveCampaign()">Save Encounter</button>
+                  <button type="button" class="btn btn-dark" (click)="endEncounter()">End Encounter</button>
+                </form>
+          </main>
+        </div>
+    </div>
+
+     <!-- Modals -->
+  <ng-template #entityModal let-c="close" let-d="dismiss">
+      <div class="modal-header">
+        <h4 class="modal-title" id="entityModal">{{selectedEntity.name}} </h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-entity-card [entity]="selectedEntity"></app-entity-card>
+        Change Current HP (Above maximum requires manual input)
+        <input type="number" #hp id="hpChange" class="form-control" min="-20" max="{{selectedEntity.hp}}" value="{{selectedEntity.currentHp}}" (click)="updateEntity(hp.value)">
+        <!--<app-status-card [entity]="selectedEntity"></app-status-card>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="updateEntity(hp.value)" (click)="c('Save click')">Close</button>
+      </div>
+    </ng-template>
+
+    <ng-template #addMonsterModal let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="addMonsterModal">Monster Vault </h4>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Select monster to add to encounter:</p>
+          <li *ngFor="let monster of monsters" (click)="addMonster(monster)">
+            <app-entity-card [entity]="monster"></app-entity-card>
+          </li>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Close</button>
+        </div>
+      </ng-template>
+
+      <!--<ng-template #conditionModal let-c="close" let-d="dismiss">
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">{{activeEntity.conditions[0]}} </h4>
+          </div>
+          <div class="modal-body">
+            Is {{activeEntity.name}} still {{activeEntity.conditions[0]}}?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="passTurn()" (click)="c('Save click')">Yes</button>
+            <button type="button" class="btn btn-outline-dark" (click)="removeCondition(condition, activeEntity)" (click)="c('Save click')">No</button>
+          </div>
+        </ng-template>-->

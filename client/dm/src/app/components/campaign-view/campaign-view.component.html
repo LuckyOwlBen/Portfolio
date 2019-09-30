@@ -1,0 +1,215 @@
+<div>
+  <app-nav></app-nav>
+  <div class="container-fluid">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Campaign</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="" (click)="openAddCampaignModal(addCampaignModal)">New</a>
+            </li>
+            <li *ngIf="currentCampaignId" class="nav-item">
+              <a class="nav-link" [routerLink]="" (click)="deleteCampaign()">Delete</a>
+            </li>
+            <li class="nav-item">
+              <a *ngIf="currentCampaignId" class="nav-link" routerLink="/encounter">Play</a>
+            </li>
+          </ul>
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Entities</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+          <ul *ngIf="currentCampaignId" class="nav flex-column">
+            <li *ngIf="activePlayers && activePlayers.length < 5" class="nav-item">
+              <a class="nav-link" [routerLink]="" (click)="openAddPlayerModal(addEntityModal)">Add Player</a>
+            </li>
+            <li *ngIf="activeMonsters && activeMonsters.length < 10" class="nav-item">
+              <a class="nav-link" [routerLink]="" (click)="openAddMonsterModal(addEntityModal)">Add Monster</a>
+            </li>
+          </ul>
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>My Campaigns</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+          <ul class="nav flex-column">
+            <li *ngFor="let campaign of campaigns">
+              <a class="nav-link" (click)="setCurrentCampaign(campaign)" [routerLink]="">{{ campaign.campaignName }}</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <h2>{{ currentCampaignName }}</h2>
+        <hr/>
+        <h4>Players:</h4>
+        <div *ngIf="activePlayers && activePlayers.length > 0">
+          <div *ngFor="let entity of activePlayers; let i = index">
+            <div class="row justify-content-start" *ngIf="i%5 === 0">
+              <div class="col-lg-2" *ngIf="i < activePlayers.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activePlayers[i])" [entity]="activePlayers[i]"></app-entity-card>
+              </div>
+              <div class="col-lg-2" *ngIf="i+1 < activePlayers.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activePlayers[i+1])" [entity]="activePlayers[i+1]"></app-entity-card>
+              </div>
+              <div class="col-lg-2" *ngIf="i+2 < activePlayers.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activePlayers[i+2])" [entity]="activePlayers[i+2]"></app-entity-card>
+              </div>
+              <div class="col-lg-2" *ngIf="i+3 < activePlayers.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activePlayers[i+3])" [entity]="activePlayers[i+3]"></app-entity-card>
+              </div>
+              <div class="col-lg-2" *ngIf="i+4 < activePlayers.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activePlayers[i+4])" [entity]="activePlayers[i+4]"></app-entity-card>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <h4>Monsters:</h4>
+        <div *ngIf="activeMonsters && activeMonsters.length > 0">
+          <div *ngFor="let entity of activeMonsters; let i = index">
+            <div class="row justify-content-start" *ngIf="i%5 === 0">
+              <div class="col-lg-2" *ngIf="i < activeMonsters.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activeMonsters[i])" [entity]="activeMonsters[i]"></app-entity-card>
+              </div>
+              <div class="col-lg-2" *ngIf="i+1 < activeMonsters.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activeMonsters[i+1])" [entity]="activeMonsters[i+1]"></app-entity-card>
+              </div>
+              <div class="col-lg-2" *ngIf="i+2 < activeMonsters.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activeMonsters[i+2])" [entity]="activeMonsters[i+2]"></app-entity-card>
+              </div>
+              <div class="col-lg-2" *ngIf="i+3 < activeMonsters.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activeMonsters[i+3])" [entity]="activeMonsters[i+3]"></app-entity-card>
+              </div>
+              <div class="col-lg-2" *ngIf="i+4 < activeMonsters.length">
+                <app-entity-card (click)="openEditEntityModal(editEntityModal, activeMonsters[i+4])" [entity]="activeMonsters[i+4]"></app-entity-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Add entity modal -->
+  <ng-template #addEntityModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="addEntityModal">Add Entity</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="entityName">Name:</span>
+        </div>
+        <input [(ngModel)]="newEntity.name" type="text" class="form-control" aria-label="entityName" aria-describedby="playerName">
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="hp">Max HP:</span>
+        </div>
+        <input [(ngModel)]="newEntity.hp" type="text" class="form-control" aria-label="hp" aria-describedby="hp">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="currentHp">Current HP:</span>
+        </div>
+        <input [(ngModel)]="newEntity.currentHp" type="text" class="form-control" aria-label="currentHp" aria-describedby="currentHp">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="armorClass">Armor Class:</span>
+        </div>
+        <input [(ngModel)]="newEntity.armorClass" type="text" class="form-control" aria-label="armorClass" aria-describedby="armorClass">
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="initiativeMod">Initiative Mod:</span>
+        </div>
+        <input [(ngModel)]="newEntity.initiativeMod" type="text" class="form-control" aria-label="initiativeMod" aria-describedby="initiativeMod">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="initiativeTotal">Initiative Total:</span>
+        </div>
+        <input [(ngModel)]="newEntity.initiativeTotal" type="text" class="form-control" aria-label="initiativeTotal" aria-describedby="initiativeTotal">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="saveEntity(modal)">Save</button>
+    </div>
+  </ng-template>
+
+  <!-- Edit entity modal -->
+  <ng-template #editEntityModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="editEntityModal">Edit Entity</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="editName">Name:</span>
+        </div>
+        <input [(ngModel)]="selectedEntity.name" type="text" class="form-control" aria-label="editName" aria-describedby="playerName">
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="editHp">Max HP:</span>
+        </div>
+        <input [(ngModel)]="selectedEntity.hp" type="text" class="form-control" aria-label="editHp" aria-describedby="hp">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="editCurrentHp">Current HP:</span>
+        </div>
+        <input [(ngModel)]="selectedEntity.currentHp" type="text" class="form-control" aria-label="editCurrentHp" aria-describedby="currentHp">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="editArmorClass">Armor Class:</span>
+        </div>
+        <input [(ngModel)]="selectedEntity.armorClass" type="text" class="form-control" aria-label="editArmorClass" aria-describedby="armorClass">
+      </div>
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="editInitiativeMod">Initiative Mod:</span>
+        </div>
+        <input [(ngModel)]="selectedEntity.initiativeMod" type="text" class="form-control" aria-label="editInitiativeMod" aria-describedby="initiativeMod">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="editInitiativeTotal">Initiative Total:</span>
+        </div>
+        <input [(ngModel)]="selectedEntity.initiativeTotal" type="text" class="form-control" aria-label="editInitiativeTotal" aria-describedby="initiativeTotal">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="deleteEntity(modal)">Delete</button>
+      <button type="button" class="btn btn-outline-dark" (click)="saveEditedEntity(modal)">Save</button>
+    </div>
+  </ng-template>
+
+  <!-- Add campaign modal -->
+  <ng-template #addCampaignModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="addCampaignModal">Add Campaign</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="input-group input-group-sm mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="campaignName">Name:</span>
+        </div>
+        <input [(ngModel)]="newCampaign.campaignName" type="text" class="form-control" aria-label="playerName" aria-describedby="playerName">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="saveNewCampaign(modal)">Save</button>
+    </div>
+  </ng-template>
+</div>

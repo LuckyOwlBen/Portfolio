@@ -1,0 +1,25 @@
+<form [formGroup]="registrationForm" (ngSubmit)="submitNewUser()" class="form-group" autocomplete="off">
+    <div class="text-center mb-4">
+        <h5>New User Registration</h5>
+    </div>
+    <div class="text-center mb-5" *ngIf="hadError" style="color: red">
+        <h4>{{errorMessage}}</h4>
+    </div>
+    <div class="form-label-group">
+        <input type="email" class="form-control" formControlName="email" placeholder="Email" required autofocus>
+    </div>
+    <div class="form-label-group">
+        <input type="{{showPass ? 'text' : 'password'}}" class="form-control" formControlName="password" placeholder="Password" required autofocus>
+        <label>Show Password</label>
+        <input type="checkbox" (change)="togglePass()">
+    </div>
+    <hr>
+    <div class="form-label-group">
+        <input type="text" class="form-control" formControlName="firstName" placeholder="First Name" autofocus>
+    </div>
+    <div class="form-label-group">
+        <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name" autofocus>
+    </div>
+    <br>
+    <button class="btn btn-lg btn-primary btn-dark btn-block">Register</button>
+</form>

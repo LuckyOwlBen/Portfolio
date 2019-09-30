@@ -1,0 +1,17 @@
+.form-signin {
+  width: 100%;
+  max-width: 420px;
+  padding-top: 10em;
+  margin: auto;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+input:focus, input[type]:focus, .form-control:focus {
+  border: 2px solid #000;
+  box-shadow: none;
+  outline: 0 none;
+}

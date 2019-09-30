@@ -1,0 +1,4 @@
+<app-entity-card [entity]="entity"></app-entity-card>
+Change Current HP (Above maximum requires manual input)
+        <input type="number" #hp id="hpChange" class="form-control" min="-20" max="{{entity.hp}}" value="{{entity.currentHp}}" (click)="updateEntity(hp.value)">
+<!--<app-status-card [entity]="entity"></app-status-card>-->

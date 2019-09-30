@@ -1,0 +1,10 @@
+<div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{entity.name}} Status Effects</h5>
+          <ul *ngIf="conditions.length > 0" class="card-text">
+            <li *ngFor="let condition of conditions">
+                <button type="button" (click)="toggleCondition(condition, entity)">{{condition}}</button>
+            </li>
+          </ul>
+        </div>
+      </div>

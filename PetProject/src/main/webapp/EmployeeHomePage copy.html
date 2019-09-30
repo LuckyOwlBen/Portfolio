@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script src ="EmployeeHomePage.js"></script>
+    </head>
+    <body>
+        <h1 id ="welcome"></h1><br><br>
+
+        <form action="logout" method="GET">
+            <button type="submit" value="logout">Log Out</button>
+        </form>
+        <h4>Make a reimbursement request</h4>
+        
+        <form action="submitRequest" method ="POST">
+            <p>Enter dollar amount</p>
+            <p>$<input name ="dollarAmount" type="number" min="0.01" step="0.01"></p>
+            <p>Enter brief reason for request</p>
+            <input name ="reason" type="text">
+            <button type="submit" value="submit request">Submit</button>
+        </form>
+        
+        <form action="manager" method="GET">
+        <button id="requestsByDpt">ReturnByDpt</button>
+        </form>
+
+        <button id="viewRequests">ReturnRequests</button>
+        <div id ="makeMeATable"></div>
+        
+        <button id="generateDirectory">Generate Employee Directory</button>
+        <div id ="DirectoryTable"></div>
+        
+        <button id="viewInfo">view my info</button>
+        <div id ="EmployeeTable"></div>
+        
+        
+        <input id = 'textBox'>
+        <button id = 'idButton' type="button">Get Employee by Id</button> 
+       	<div id="tableByEmployee"></div>
+        
+        <form action="updateInfo" method="GET">
+        	<h4>Username</h4><br>
+        	<input name="username" type="text"><br>
+        	<h4>Password</h4><br>
+        	<input name="password" type="password"><br>
+        	<h4>email</h4><br>
+        	<input name="email" type ="text"><br>
+        	<button type="submit" value="update info">Submit</button>
+        </form>
+    </body>
+</html>

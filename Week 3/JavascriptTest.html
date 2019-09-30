@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+      <title>Forms</title>
+      <meta name ="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="styles.css"/>
+      <script src="JSHWpart1.js"></script>
+   </head>
+   <body>
+      <form>
+         <fieldset>
+            <legend>populate fields</legend>
+            <!--could set the step=".01" if i wanted options to increment by decimal amounts-->
+            <h4>enter a number for fibonacci</h4><br>
+            <input type = "number" id="num"/><br>
+            <h4>enter a comma seperated list for sorting</h4><br>
+            <input pattern="[0-9]{5}" id="f"/><br>
+            <h4>enter a number for factorializing</h4><br>
+            <input type = "number" id="n"/><br>
+            <h4>enter an array for left rotation</h4><br>
+            <input type = "text" id="array"/><br>
+            <h4>enter the number of reps for the left rotation</h4><br>
+            <input type = "number" id="reps"/><br>
+            <h4>enter a string of brackets for bracket balancing</h4><br>
+            <input type="text" id="bracketString"/>
+
+         </fieldset>
+         <br>
+         <button type="button" id="executeFunctions">FizzBuzz!</button>
+      </form>
+   </body>
+</html>

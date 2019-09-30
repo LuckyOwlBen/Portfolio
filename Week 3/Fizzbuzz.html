@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+      <title>Forms</title>
+      <meta name ="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="styles.css"/>
+      <script src="helloJavaScript.js"></script>
+   </head>
+   <body>
+      <form>
+         <fieldset>
+            <legend>Numbers by which to check divisibility</legend>
+            <!--could set the step=".01" if i wanted options to increment by decimal amounts-->
+            <input type = "number" id="num1"/><br>
+            <input type ="number" id="num2"/>
+         </fieldset>
+         <fieldset>
+            <legend>phrases</legend>
+            <input id="phrase1"/><br>
+            <input id="phrase2"/>
+         </fieldset>
+         <br>
+         <button type="button" id="fizzBuzzButton">FizzBuzz!</button>
+      </form>
+   </body>
+   <!--
+   <script>//DO NOT DO THIS
+      //"window" is the global object in the browser.
+      //this is applying an event listener to the window
+      //which will execute when the page loads
+      window.onload=function(){
+         console.log("hello world");
+      }
+   </script>-->
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8"/>
+      <title>Forms</title>
+      <meta name ="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" type="text/css" href="styles.css"/>
+   </head>
+   <body>
+      <!--let me google that for you-->
+      <form action="https://google.com/search" method="GET">
+         <input type="text" name="q"/><br>
+         <input type="submit" value="let me google that for you"/>
+      </form>
+      <form>
+         <input name="text1" autocomplete="off" placeholder="AAA999" required="true" pattern="[A-z]{3}[0-9]{3}"/>
+         <input name="date1" type="date"/>
+         <input type="submit" value="submit"/>
+      </form>
+      <form>
+         <!--fieldset from html5-->
+         <fieldset>
+            <legend>Cat Breeds</legend>
+            <input type="radio"  name="radio1" value="sphinx" checked/>Sphinx<br>
+            <input type="radio"  name="radio1" value="Domestic shorthair" checked/>Domestic short hair<br>
+            <input type="radio"  name="radio1" value="begal" checked/>bengal<br>
+         </fieldset>
+         <br>
+         <fieldset>
+            <legend>Programming Languages</legend>
+            <input type="checkbox"  name="checkbox1" value="Java" checked/>Java<br>
+            <input type="checkbox"  name="checkbox1" value="Python" checked/>Python<br>
+            <input type="checkbox"  name="checkbox1" value="C++" checked/>C++<br>
+         </fieldset>
+         
+         <input type="submit" vaule="submit"/>
+      </form>
+   </body>
+</html>
